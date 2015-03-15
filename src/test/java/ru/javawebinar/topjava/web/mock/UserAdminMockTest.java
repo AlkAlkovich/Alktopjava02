@@ -12,8 +12,11 @@ import ru.javawebinar.topjava.web.user.AdminUserRestController;
 
 import java.util.Arrays;
 
+
 public class UserAdminMockTest {
     private static ConfigurableApplicationContext appCtx;
+
+
     private static AdminUserRestController controller;
 
     @BeforeClass

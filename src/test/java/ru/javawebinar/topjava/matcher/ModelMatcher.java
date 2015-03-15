@@ -28,7 +28,7 @@ public class ModelMatcher<T, R> {
         Assert.assertEquals(map(expected, entityConverter), map(actual, entityConverter));
     }
 
-    public static <S, T> List<T> map(List<S> list, Function<S, T> converter) {
+    public static <S, T> List<Object> map(List<S> list, Function<S, T> converter) {
         return list.stream().map(converter).collect(Collectors.toList());
     }
 }

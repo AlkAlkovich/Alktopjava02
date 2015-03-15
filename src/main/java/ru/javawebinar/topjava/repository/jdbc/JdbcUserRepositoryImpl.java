@@ -23,11 +23,15 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
 
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
+   @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    ;
+
 
     private SimpleJdbcInsert insertUser;
 
