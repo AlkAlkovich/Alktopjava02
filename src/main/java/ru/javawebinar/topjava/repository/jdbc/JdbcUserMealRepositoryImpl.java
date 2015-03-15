@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.repository.jdbc;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
@@ -14,6 +16,9 @@ import java.util.List;
 
 @Repository
 public class JdbcUserMealRepositoryImpl implements UserMealRepository {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public UserMeal save(UserMeal UserMeal, int userId) {
