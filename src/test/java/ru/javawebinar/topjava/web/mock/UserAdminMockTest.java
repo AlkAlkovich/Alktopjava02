@@ -13,14 +13,15 @@ import ru.javawebinar.topjava.web.user.AdminUserRestController;
 import java.util.Arrays;
 
 public class UserAdminMockTest {
+
     private static ConfigurableApplicationContext appCtx;
     private static AdminUserRestController controller;
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-test.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
-        controller = appCtx.getBean(AdminUserRestController.class);
+        controller = (AdminUserRestController) appCtx.getBean("adminUserRestController");
     }
 
     @AfterClass

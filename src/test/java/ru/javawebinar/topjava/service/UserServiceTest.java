@@ -21,15 +21,14 @@ import java.util.List;
 import static ru.javawebinar.topjava.UserTestData.*;
 
 @ContextConfiguration({
-        "classpath:spring/spring-app.xml",
+        "classpath:spring/spring-test.xml",
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceTest {
 
     @Autowired
-    protected UserService service;
-
+    private UserService service;
     @Autowired
     private DbPopulator dbPopulator;
 

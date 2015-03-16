@@ -13,5 +13,8 @@ VALUES ('Admin', 'admin@gmail.com', 'admin');
 INSERT INTO user_roles (role, user_id) VALUES ('ROLE_USER', 100000);
 INSERT INTO user_roles (role, user_id) VALUES ('ROLE_ADMIN', 100001);
 
+INSERT INTO meals (description,datetime,calories,user_meal_id)
+  VALUES ('Fastfood','2015-01-01',1999,100000);
+INSERT INTO meals (description,datetime,calories,user_meal_id)
+  VALUES ('chiken','2015-01-02',1939,100000);
 
-INSERT INTO public.meals (description,datetime,calories,user_meal_id) VALUES ('Fastfood','2015-01-01',1999,100000);
