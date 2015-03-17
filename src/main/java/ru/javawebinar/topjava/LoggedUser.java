@@ -12,7 +12,7 @@ import java.util.Set;
  * Mock implementation
  */
 public class LoggedUser {
-    protected int id = 0;
+    protected int id = 100000;
     protected Set<Role> roles = Collections.singleton(Role.ROLE_USER);
     protected boolean enabled = true;
 

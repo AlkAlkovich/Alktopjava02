@@ -19,7 +19,7 @@ public class UserAdminMockTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-test.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-test.xml","spring/spring-db.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
         controller = (AdminUserRestController) appCtx.getBean("adminUserRestController");
     }

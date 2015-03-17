@@ -2,8 +2,10 @@ package ru.javawebinar.topjava.service;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.LoggerWrapper;
 import ru.javawebinar.topjava.MealTestData;
@@ -26,9 +28,10 @@ import static ru.javawebinar.topjava.MealTestData.USER_MEAL;
  * To change this template use File | Settings | File Templates.
  */
 @ContextConfiguration({
-        "classpath:spring/spring-test.xml",
+        "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
 })
+@RunWith(SpringJUnit4ClassRunner.class)
 public class UserMealServiceTest {
 
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealServiceTest.class);
@@ -46,7 +49,7 @@ public class UserMealServiceTest {
 
     @Test
     public void testGet() throws Exception {
-        UserMeal userMeal = userMealService.get(BaseEntity.START_SEQ, LoggedUser.id());
+        UserMeal userMeal = userMealService.get(BaseEntity.START_SEQ+2, LoggedUser.id());
         MATCHER.assertEquals(userMeal,USER_MEAL);
 
     }
@@ -54,7 +57,7 @@ public class UserMealServiceTest {
     @Test
     public void testDelete() throws Exception {
 
-        userMealService.delete(BaseEntity.START_SEQ,LoggedUser.id());
+        userMealService.delete(BaseEntity.START_SEQ+2,LoggedUser.id());
         MATCHER.assertListEquals(Collections.singletonList(USER_MEAL),userMealService.getAll(LoggedUser.id()));
     }
 

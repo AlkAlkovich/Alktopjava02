@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import ru.javawebinar.topjava.LoggerWrapper;
 import ru.javawebinar.topjava.UserTestData.*;
 import ru.javawebinar.topjava.model.BaseEntity;
 import ru.javawebinar.topjava.model.Role;
@@ -21,12 +22,13 @@ import java.util.List;
 import static ru.javawebinar.topjava.UserTestData.*;
 
 @ContextConfiguration({
-        "classpath:spring/spring-test.xml",
+        "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceTest {
 
+    private static final LoggerWrapper LOG = LoggerWrapper.get(UserServiceTest.class);
     @Autowired
     private UserService service;
     @Autowired
@@ -34,6 +36,7 @@ public class UserServiceTest {
 
     @Before
     public void setUp() throws Exception {
+        LOG.info("populing");
         dbPopulator.execute();
     }
 

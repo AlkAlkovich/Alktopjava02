@@ -9,30 +9,31 @@ import java.time.LocalDateTime;
  * 06.03.2015.
  */
 public class UserMeal extends BaseEntity {
-    protected LocalDateTime dateTime;
+    protected LocalDateTime datetime;
 
     protected String description;
 
     protected int calories;
 
-    private User user;
+    private User user_by_id;
 
     public UserMeal() {
     }
 
-    public UserMeal(Integer id, LocalDateTime dateTime, String description, int calories) {
+    public UserMeal(Integer id, LocalDateTime datetime, String description, int calories) {
         super(id);
-        this.dateTime = dateTime;
+        this.datetime = datetime;
         this.description = description;
         this.calories = calories;
     }
+
 
     public UserMeal(UserMeal testMeals) {
         this(testMeals.getId(),testMeals.getDateTime(),testMeals.getDescription(),testMeals.getCalories());
     }
 
     public LocalDateTime getDateTime() {
-        return dateTime;
+        return datetime;
     }
 
     public String getDescription() {
@@ -48,16 +49,24 @@ public class UserMeal extends BaseEntity {
     }
 
     public User getUser() {
-        return user;
+        return user_by_id;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public void setDatetime(LocalDateTime datetime) {
+        this.datetime = datetime;
     }
 
     @Override
     public String toString() {
-        return "Meal(" + id + ", " + TimeUtil.toString(dateTime) + ", '" + description + "', calories:" + calories + ')';
+        return "Meal(" + id + ", " + TimeUtil.toString(datetime) + ", '" + description + "', calories:" + calories + ')';
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.user_by_id = user;
     }
 
 
