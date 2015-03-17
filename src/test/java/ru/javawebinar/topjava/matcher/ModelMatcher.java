@@ -29,6 +29,6 @@ public class ModelMatcher<T, R> {
     }
 
     public static <S, T> List<T> map(List<S> list, Function<S, T> converter) {
-        return list.stream().map(converter).collect(Collectors.toList());
+        return (List<T>) list.stream().map(converter).collect(Collectors.toList());
     }
 }
