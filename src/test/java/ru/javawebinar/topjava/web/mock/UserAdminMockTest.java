@@ -19,7 +19,7 @@ public class UserAdminMockTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-test.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/spring-db.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
         controller = (AdminUserRestController) appCtx.getBean("adminUserRestController");
     }
@@ -36,7 +36,7 @@ public class UserAdminMockTest {
 
     @Test
     public void testDelete() throws Exception {
-        controller.delete(7);
+        controller.delete(100000);
     }
 
     @Test(expected = NotFoundException.class)

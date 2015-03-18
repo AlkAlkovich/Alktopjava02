@@ -17,7 +17,7 @@ import ru.javawebinar.topjava.web.user.AdminUserRestController;
  * 13.03.2015.
  */
 @ContextConfiguration({
-        "classpath:spring/spring-test.xml",
+        "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,7 +42,7 @@ public class UserAdminSpringMockTest {
 
     @Test
     public void testDelete() throws Exception {
-        controller.delete(7);
+        controller.delete(100000);
     }
 
     @Test(expected = NotFoundException.class)
