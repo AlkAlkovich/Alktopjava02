@@ -1,9 +1,14 @@
 package ru.javawebinar.topjava.web.mock;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.util.DbPopulator;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.user.AdminUserRestController;
 
@@ -11,8 +16,21 @@ import ru.javawebinar.topjava.web.user.AdminUserRestController;
  * GKislin
  * 13.03.2015.
  */
-
+@ContextConfiguration({
+        "classpath:spring/spring-test.xml",
+        "classpath:spring/spring-db.xml"
+})
+@RunWith(SpringJUnit4ClassRunner.class)
 public class UserAdminSpringMockTest {
+
+    @Autowired
+   private DbPopulator populator;
+
+    @Before
+    public void setUp() throws Exception {
+        populator.execute();
+
+    }
 
     @Autowired
     private AdminUserRestController controller;

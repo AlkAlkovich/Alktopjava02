@@ -14,10 +14,12 @@ INSERT INTO user_roles (role, user_id) VALUES ('ROLE_USER', 100000);
 INSERT INTO user_roles (role, user_id) VALUES ('ROLE_ADMIN', 100001);
 
 INSERT INTO meals (description,datetime,calories,user_by_id)
-  VALUES ('Fastfood','2015-01-01',1999,100000);
+  VALUES ('meal1','2015-01-01',10,100000);
 INSERT INTO meals (description,datetime,calories,user_by_id)
-  VALUES ('chiken','2015-01-05',1939,100000);
+  VALUES ('meal2','2015-01-02',11,100000);
 INSERT INTO meals (description,datetime,calories,user_by_id)
-  VALUES ('will be between','2015-01-03',19239,100000);
+  VALUES ('meal3','2015-01-03',12,100000);
+INSERT INTO meals (description,datetime,calories,user_by_id)
+  VALUES ('meal4','2015-01-04',13,100000);
 
 

@@ -1,7 +1,6 @@
 package ru.javawebinar.topjava;
 
 import ru.javawebinar.topjava.matcher.ModelMatcher;
-import ru.javawebinar.topjava.model.BaseEntity;
 import ru.javawebinar.topjava.model.UserMeal;
 
 import java.time.LocalDateTime;
@@ -13,7 +12,11 @@ import java.util.function.Function;
  */
 public class MealTestData {
 
-    public static final UserMeal USER_MEAL=new UserMeal(BaseEntity.START_SEQ,LocalDateTime.now(),"s",2122);
+    public static final UserMeal USER_MEAL=new UserMeal(100002,LocalDateTime.of(2015,01,01,00,00),"meal1",10);
+    public static UserMeal MEAL1= new UserMeal(100003, LocalDateTime.of(2015,01,02,00,00), "meal2", 11);
+    public static UserMeal MEAL2= new UserMeal(100004, LocalDateTime.of(2015,01,03,00,00), "meal3", 12);
+    public static UserMeal MEAL3= new UserMeal(100005, LocalDateTime.of(2015,01,04,00,00), "meal4", 13);
+//    public static UserMeal MEAL4= new UserMeal(null, LocalDateTime.of(2015,01,04,00,00), "meal4", 1012210);
 
     public static final ModelMatcher<UserMeal, String> MATCHER = new ModelMatcher<>(
             new Function<UserMeal, String>() {

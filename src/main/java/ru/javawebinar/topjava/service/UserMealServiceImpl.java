@@ -24,6 +24,8 @@ public class UserMealServiceImpl implements UserMealService {
     private UserMealRepository repository;
 
 
+    public UserMealServiceImpl() {
+    }
 
     @Override
     public UserMeal get(int id, int userId) {

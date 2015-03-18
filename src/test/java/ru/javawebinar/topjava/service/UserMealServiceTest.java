@@ -15,11 +15,10 @@ import ru.javawebinar.topjava.util.DbPopulator;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import static ru.javawebinar.topjava.MealTestData.MATCHER;
-import static ru.javawebinar.topjava.MealTestData.USER_MEAL;
+import static ru.javawebinar.topjava.MealTestData.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Alk
@@ -57,28 +56,29 @@ public class UserMealServiceTest {
     @Test
     public void testDelete() throws Exception {
 
-        userMealService.delete(BaseEntity.START_SEQ+2,LoggedUser.id());
-        MATCHER.assertListEquals(Collections.singletonList(USER_MEAL),userMealService.getAll(LoggedUser.id()));
+        userMealService.delete(100002,LoggedUser.id());
+        List<UserMeal>all=userMealService.getAll(LoggedUser.id());
+        MATCHER.assertListEquals(Arrays.asList(MEAL1,MEAL2,MEAL3),userMealService.getAll(LoggedUser.id()));
     }
 
     @Test
     public void testGetBetween() throws Exception {
 
-       List<UserMeal> userMeals= userMealService.getBetween(LocalDateTime.of(2013,02,01,21,22),LocalDateTime.now(),LoggedUser.id());
-        MATCHER.assertListEquals(Arrays.asList(USER_MEAL),userMeals);
+       List<UserMeal> userMeals= userMealService.getBetween(LocalDateTime.of(2015,01,02,00,00),LocalDateTime.of(2015,01,04,00,00),LoggedUser.id());
+        MATCHER.assertListEquals(Arrays.asList(MEAL1,MEAL2,MEAL3),userMeals);
     }
 
     @Test
     public void testGetAll() throws Exception {
 
          List<UserMeal> userMeals=userMealService.getAll(LoggedUser.id());
-        MATCHER.assertListEquals(Arrays.asList(USER_MEAL),userMeals);
+        MATCHER.assertListEquals(Arrays.asList(USER_MEAL,MEAL1,MEAL2,MEAL3),userMeals);
     }
 
     @Test
     public void testDeleteAll() throws Exception {
         userMealService.deleteAll(LoggedUser.id());
-        MATCHER.assertListEquals(Collections.singletonList(USER_MEAL),userMealService.getAll(LoggedUser.id()));     //TODO WHY?
+        MATCHER.assertListEquals(userMealService.getAll(LoggedUser.id()),userMealService.getAll(LoggedUser.id()));     //TODO WHY?
 
     }
 
@@ -88,15 +88,15 @@ public class UserMealServiceTest {
         MealTestData.TestMeals meals=new MealTestData.TestMeals(USER_MEAL);
         meals.setDescription("hren");
         userMealService.update(meals,LoggedUser.id());
-        MATCHER.assertEquals(meals,userMealService.get(BaseEntity.START_SEQ,LoggedUser.id()));
+        MATCHER.assertEquals(meals,userMealService.get(100002,LoggedUser.id()));
     }
 
     @Test
     public void testSave() throws Exception {
 
-        MealTestData.TestMeals meals=new MealTestData.TestMeals(BaseEntity.START_SEQ+1,LocalDateTime.now(),"fast",1231);
-        UserMeal userMeal=userMealService.update(meals.asMeal(),LoggedUser.id());
+        MealTestData.TestMeals meals=new MealTestData.TestMeals(100003,LocalDateTime.now(),"fast",1231);
+        UserMeal userMeal=userMealService.save(MEAL3,LoggedUser.id());
         meals.setId(userMeal.getId());
-        MATCHER.assertListEquals(Arrays.asList(USER_MEAL,meals),userMealService.getAll(LoggedUser.id()));
+        MATCHER.assertListEquals(Arrays.asList(USER_MEAL,MEAL1,MEAL2,MEAL3),userMealService.getAll(LoggedUser.id()));
     }
 }
