@@ -26,13 +26,13 @@ CREATE TABLE USER_ROLES
 
 CREATE TABLE MEALS
 (
-  meal_id INTEGER  PRIMARY KEY DEFAULT nextval('GLOBAL_SEQ'),
+  id INTEGER  PRIMARY KEY DEFAULT nextval('GLOBAL_SEQ'),
   description VARCHAR,
   calories INTEGER not null ,
   dateTime TIMESTAMP default now(),
-  user_meal_id INTEGER not null,
-  CONSTRAINT meal_id UNIQUE (meal_id),
-  FOREIGN KEY (user_meal_id)REFERENCES users(id) ON DELETE CASCADE
+  user_by_id INTEGER not null,
+  CONSTRAINT id UNIQUE (id),
+  FOREIGN KEY (user_by_id)REFERENCES users(id) ON DELETE CASCADE
 
 
 );

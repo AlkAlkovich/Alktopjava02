@@ -114,7 +114,7 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public void deleteAll(int userId) {
-        jdbcTemplate.update("DELETE FROM meals");
+        jdbcTemplate.update("DELETE FROM meals WHERE user_by_id=?",userId);
 
     }
 
