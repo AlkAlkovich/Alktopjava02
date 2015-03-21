@@ -7,7 +7,6 @@ import ru.javawebinar.topjava.repository.UserMealRepository;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 /**
@@ -32,7 +31,7 @@ public class UserMealServiceImpl implements UserMealService {
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return repository.getBetween(startDate, endDate.plus(1, ChronoUnit.DAYS), userId);
+        return repository.getBetween(startDate, endDate, userId);
     }
 
     @Override

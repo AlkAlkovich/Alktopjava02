@@ -20,6 +20,10 @@ public class UserMeal extends BaseEntity {
     public UserMeal() {
     }
 
+    public UserMeal(UserMeal meal) {
+        this(meal.id, meal.dateTime, meal.description, meal.calories);
+    }
+
     public UserMeal(Integer id, LocalDateTime dateTime, String description, int calories) {
         super(id);
         this.dateTime = dateTime;
@@ -45,6 +49,14 @@ public class UserMeal extends BaseEntity {
 
     public User getUser() {
         return user;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
 
     @Override
