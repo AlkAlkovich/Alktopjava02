@@ -14,9 +14,17 @@ import java.time.LocalDateTime;
 @Table(name="MEALS")
 @NamedQueries({
         @NamedQuery(name=UserMeal.ALL_SORTED, query="SELECT m FROM UserMeal m WHERE m.user.id=?1 ORDER BY m.id DESC "),
+        @NamedQuery(name=UserMeal.GET_BY_ID, query="SELECT m FROM UserMeal m WHERE m.user.id=?1 AND m.id=?2 ORDER BY m.id DESC "),
+        @NamedQuery(name=UserMeal.DELETE, query="DELETE FROM UserMeal m WHERE m.user.id=?1 AND m.id=?2"),
+        @NamedQuery(name=UserMeal.DEL_ALL, query="DELETE FROM UserMeal m WHERE m.user.id=?1"),
+        @NamedQuery(name=UserMeal.BETWEEN, query="SELECT m FROM UserMeal m WHERE m.dateTime>=?1 AND m.dateTime<=?2 AND m.user.id=?3 ORDER BY m.dateTime DESC "),
 })
 public class UserMeal extends BaseEntity {
-public static final String ALL_SORTED="UserMeal.getAllSorted";
+    public static final String ALL_SORTED="UserMeal.getAllSorted";
+    public static final String DELETE="UserMeal.delete";
+    public static final String GET_BY_ID="UserMeal.getById";
+    public static final String DEL_ALL="UserMeal.deleteAll";
+    public static final String BETWEEN="UserMeal.between";
 
     @Column(name = "dateTime",nullable = false)
     @Convert(converter = LocalDateTimePersistanceConverter.class)

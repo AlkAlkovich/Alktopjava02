@@ -52,7 +52,7 @@ public class UserMealServiceTest {
     public void testSave() throws Exception {
         UserMeal created = getCreated();
         service.save(created, START_SEQ);
-        MATCHER.assertListEquals(Arrays.asList(MEAL4, MEAL3, MEAL2, MEAL1,created), service.getAll(START_SEQ));
+        MATCHER.assertListEquals(Arrays.asList(created,MEAL4, MEAL3, MEAL2, MEAL1), service.getAll(START_SEQ));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class UserMealServiceTest {
 
     @Test(expected = NotFoundException.class)
     public void testGetNotFound() throws Exception {
-        service.get(MEAL1_ID, START_SEQ + 1);
+        service.get(MEAL1_ID+19, START_SEQ + 19);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class UserMealServiceTest {
 
     @Test(expected = NotFoundException.class)
     public void testNotFoundUpdate() throws Exception {
-        UserMeal item = service.get(MEAL1_ID, START_SEQ);
+        UserMeal item = service.get(MEAL1_ID+100, START_SEQ);
         service.update(item, START_SEQ + 1);
     }
 

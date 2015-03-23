@@ -25,22 +25,30 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository{
     @Transactional
     public UserMeal save(UserMeal UserMeal, int userId) {
 
-
+        if(UserMeal.isNew()){
         User user= em.find(User.class,userId);
         UserMeal.setUser(user);
         em.persist(UserMeal);
+        }else {
+            User user= em.find(User.class,userId);
+            UserMeal.setUser(user);
+            em.merge(UserMeal);
+        }
 
         return UserMeal;
     }
 
     @Override
+    @Transactional
     public boolean delete(int id, int userId) {
-        return false;
+        return em.createNamedQuery(UserMeal.DELETE).setParameter(1,userId).setParameter(2,id).executeUpdate()!=0;
     }
 
     @Override
-    public UserMeal get(int id, int userId) {
-        return null;
+    public UserMeal get(int id, int userId){
+
+//       return em.createNamedQuery(UserMeal.GET_BY_ID,UserMeal.class).setParameter(1,userId).setParameter(2,id).getSingleResult();
+         return em.find(UserMeal.class,id);
     }
 
     @Override
@@ -49,12 +57,13 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository{
     }
 
     @Override
+    @Transactional
     public void deleteAll(int userId) {
-
+        em.createNamedQuery(UserMeal.DEL_ALL).setParameter(1,userId).executeUpdate();
     }
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return null;
+        return em.createNamedQuery(UserMeal.BETWEEN,UserMeal.class).setParameter(1,startDate).setParameter(2,endDate).setParameter(3,userId).getResultList();
     }
 }
