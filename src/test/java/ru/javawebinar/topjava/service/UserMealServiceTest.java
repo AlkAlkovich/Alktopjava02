@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.javawebinar.topjava.model.UserMeal;
@@ -22,6 +23,7 @@ import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles({"postgres"})
 public class UserMealServiceTest {
 
     @Autowired
@@ -50,7 +52,7 @@ public class UserMealServiceTest {
     public void testSave() throws Exception {
         UserMeal created = getCreated();
         service.save(created, START_SEQ);
-        MATCHER.assertListEquals(Arrays.asList(created, MEAL4, MEAL3, MEAL2, MEAL1), service.getAll(START_SEQ));
+        MATCHER.assertListEquals(Arrays.asList(MEAL4, MEAL3, MEAL2, MEAL1,created), service.getAll(START_SEQ));
     }
 
     @Test

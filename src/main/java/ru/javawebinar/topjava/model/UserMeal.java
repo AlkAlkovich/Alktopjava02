@@ -1,23 +1,35 @@
 package ru.javawebinar.topjava.model;
 
+import ru.javawebinar.topjava.util.LocalDateTimePersistanceConverter;
 import ru.javawebinar.topjava.util.TimeUtil;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * GKislin
  * 06.03.2015.
  */
+@Entity
+@Table(name="MEALS")
+@NamedQueries({
+        @NamedQuery(name=UserMeal.ALL_SORTED, query="SELECT m FROM UserMeal m WHERE m.user.id=?1 ORDER BY m.id DESC "),
+})
 public class UserMeal extends BaseEntity {
+public static final String ALL_SORTED="UserMeal.getAllSorted";
+
+    @Column(name = "dateTime",nullable = false)
+    @Convert(converter = LocalDateTimePersistanceConverter.class)
     protected LocalDateTime dateTime;
 
+    @Column(name = "description",nullable = false)
     protected String description;
 
+    @Column(name = "calories",nullable = false)
     protected int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
     public UserMeal() {
