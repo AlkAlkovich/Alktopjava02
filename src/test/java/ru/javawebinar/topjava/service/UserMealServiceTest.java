@@ -63,7 +63,7 @@ public class UserMealServiceTest {
 
     @Test(expected = NotFoundException.class)
     public void testGetNotFound() throws Exception {
-        service.get(MEAL1_ID+19, START_SEQ + 19);
+        service.get(MEAL1_ID, START_SEQ +1);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class UserMealServiceTest {
 
     @Test(expected = NotFoundException.class)
     public void testNotFoundUpdate() throws Exception {
-        UserMeal item = service.get(MEAL1_ID+100, START_SEQ);
+        UserMeal item = service.get(MEAL1_ID, START_SEQ);
         service.update(item, START_SEQ + 1);
     }
 

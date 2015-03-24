@@ -25,6 +25,7 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository{
     @Transactional
     public UserMeal save(UserMeal UserMeal, int userId) {
 
+        if(UserMeal.getUser() == null){
         if(UserMeal.isNew()){
         User user= em.find(User.class,userId);
         UserMeal.setUser(user);
@@ -36,6 +37,7 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository{
         }
 
         return UserMeal;
+        }else return null;
     }
 
     @Override
@@ -45,10 +47,13 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository{
     }
 
     @Override
-    public UserMeal get(int id, int userId){
+    public UserMeal get(int id, int userId) {
 
 //       return em.createNamedQuery(UserMeal.GET_BY_ID,UserMeal.class).setParameter(1,userId).setParameter(2,id).getSingleResult();
-         return em.find(UserMeal.class,id);
+        UserMeal userMeal = em.getReference(UserMeal.class,id);
+        if (userMeal.getUser().getId()==userId){
+            return userMeal;
+        }else   return null;
     }
 
     @Override

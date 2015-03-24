@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Table(name="MEALS")
 @NamedQueries({
         @NamedQuery(name=UserMeal.ALL_SORTED, query="SELECT m FROM UserMeal m WHERE m.user.id=?1 ORDER BY m.id DESC "),
-        @NamedQuery(name=UserMeal.GET_BY_ID, query="SELECT m FROM UserMeal m WHERE m.user.id=?1 AND m.id=?2 ORDER BY m.id DESC "),
+        @NamedQuery(name=UserMeal.GET_BY_ID, query="SELECT m FROM UserMeal m WHERE m.user.id=?1 AND m.id=?2  "),
         @NamedQuery(name=UserMeal.DELETE, query="DELETE FROM UserMeal m WHERE m.user.id=?1 AND m.id=?2"),
         @NamedQuery(name=UserMeal.DEL_ALL, query="DELETE FROM UserMeal m WHERE m.user.id=?1"),
         @NamedQuery(name=UserMeal.BETWEEN, query="SELECT m FROM UserMeal m WHERE m.dateTime>=?1 AND m.dateTime<=?2 AND m.user.id=?3 ORDER BY m.dateTime DESC "),
