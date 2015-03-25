@@ -32,9 +32,11 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
             em.persist(userMeal);
             return userMeal;
         } else {
-            if (userMeal.getUser().getId() != userId) {
+            UserMeal meal=em.getReference(UserMeal.class,userMeal.getId());
+            if (meal.getUser().getId() != userId) {
                 return null;
             } else {
+                userMeal.setUser(em.getReference(User.class, userId));
                 em.merge(userMeal);
                 return userMeal;
             }
@@ -67,13 +69,20 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
     }
 
     @Override
-    public UserMeal get(int id, int userId) {
+    public UserMeal get(int id, int userId){
 
-//       return em.createNamedQuery(UserMeal.GET_BY_ID,UserMeal.class).setParameter(1,userId).setParameter(2,id).getSingleResult();
-        UserMeal userMeal = em.getReference(UserMeal.class, id);
-        if (userMeal.getUser().getId() == userId) {
-            return userMeal;
-        } else return null;
+       List<UserMeal> userMeals=em.createNamedQuery(UserMeal.GET_BY_ID,UserMeal.class).setParameter(1,userId).setParameter(2,id).getResultList();
+        if(!userMeals.isEmpty()){
+            if(userMeals.get(0).getUser().getId()==userId){
+                return userMeals.get(0);
+            }else return null;
+        }
+
+//        UserMeal userMeal = em.getReference(UserMeal.class, id);
+//        if (userMeal.getUser().getId() == userId) {
+//            return userMeal;
+//        } else return null;
+        return null;
     }
 
     @Override
