@@ -76,13 +76,13 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
             if(userMeals.get(0).getUser().getId()==userId){
                 return userMeals.get(0);
             }else return null;
-        }
+    }else return null;
 
 //        UserMeal userMeal = em.getReference(UserMeal.class, id);
 //        if (userMeal.getUser().getId() == userId) {
 //            return userMeal;
 //        } else return null;
-        return null;
+
     }
 
     @Override
