@@ -17,58 +17,78 @@ import java.util.List;
  */
 @Repository
 @Transactional(readOnly = true)
-public class JpaUserMealRepositoryImpl implements UserMealRepository{
+public class JpaUserMealRepositoryImpl implements UserMealRepository {
 
     @PersistenceContext
     private EntityManager em;
+
     @Override
     @Transactional
-    public UserMeal save(UserMeal UserMeal, int userId) {
+    public UserMeal save(UserMeal userMeal, int userId) {
 
-        if(UserMeal.getUser() == null){
-        if(UserMeal.isNew()){
-        User user= em.find(User.class,userId);
-        UserMeal.setUser(user);
-        em.persist(UserMeal);
-        }else {
-            User user= em.find(User.class,userId);
-            UserMeal.setUser(user);
-            em.merge(UserMeal);
+        if (userMeal.isNew()) {
+            User user = em.getReference(User.class, userId);
+            userMeal.setUser(user);
+            em.persist(userMeal);
+            return userMeal;
+        } else {
+            if (userMeal.getUser().getId() != userId) {
+                return null;
+            } else {
+                em.merge(userMeal);
+                return userMeal;
+            }
         }
 
-        return UserMeal;
-        }else return null;
+
+//        if (UserMeal.getUser() == null) {
+//            if (UserMeal.isNew()) {
+//                User user = em.find(User.class, userId);
+//                UserMeal.setUser(user);
+//               em.persist(UserMeal);
+//            } else {
+//                User user = em.find(User.class, userId);
+//                UserMeal.setUser(user);
+//                if(UserMeal.getUser().getId()!=userId){
+//                    System.out.println("np");
+//                    return null;
+//                }
+//                em.merge(UserMeal);
+//            }
+//
+//            return UserMeal;
+//        } else return null;
     }
 
     @Override
     @Transactional
     public boolean delete(int id, int userId) {
-        return em.createNamedQuery(UserMeal.DELETE).setParameter(1,userId).setParameter(2,id).executeUpdate()!=0;
+        return em.createNamedQuery(UserMeal.DELETE).setParameter(1, userId).setParameter(2, id).executeUpdate() != 0;
     }
 
     @Override
     public UserMeal get(int id, int userId) {
 
 //       return em.createNamedQuery(UserMeal.GET_BY_ID,UserMeal.class).setParameter(1,userId).setParameter(2,id).getSingleResult();
-        UserMeal userMeal = em.getReference(UserMeal.class,id);
-        if (userMeal.getUser().getId()==userId){
+        UserMeal userMeal = em.getReference(UserMeal.class, id);
+        if (userMeal.getUser().getId() == userId) {
             return userMeal;
-        }else   return null;
+        } else return null;
     }
 
     @Override
     public List<UserMeal> getAll(int userId) {
-        return em.createNamedQuery(UserMeal.ALL_SORTED,UserMeal.class).setParameter(1,userId).getResultList();
+        return em.createNamedQuery(UserMeal.ALL_SORTED, UserMeal.class).setParameter(1, userId).getResultList();
     }
 
     @Override
     @Transactional
     public void deleteAll(int userId) {
-        em.createNamedQuery(UserMeal.DEL_ALL).setParameter(1,userId).executeUpdate();
+        em.createNamedQuery(UserMeal.DEL_ALL).setParameter(1, userId).executeUpdate();
     }
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return em.createNamedQuery(UserMeal.BETWEEN,UserMeal.class).setParameter(1,startDate).setParameter(2,endDate).setParameter(3,userId).getResultList();
+        return em.createNamedQuery(UserMeal.BETWEEN, UserMeal.class).setParameter(1, startDate).setParameter(2, endDate).setParameter(3, userId).getResultList();
     }
 }
