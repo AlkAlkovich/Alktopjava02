@@ -12,7 +12,8 @@
     </appender>
 
     <logger name="org.springframework.jdbc" level="debug"/>
-    <logger name="ru.gkislin" level="DEBUG"/>
+    <logger name="ru.javawebinar.topjava" level="DEBUG"/>
+    <!--<logger name="org.hibernate" level="debug"/>-->
 
     <root level="WARN">
         <appender-ref ref="console"/>

@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserMealRepository {
 
     // UserMeal.user = null
-    UserMeal save(UserMeal UserMeal, int userId);
+    UserMeal save(UserMeal userMeal, int userId);
 
     // false if not found
     boolean delete(int id, int userId);
