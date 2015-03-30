@@ -25,7 +25,7 @@ import static ru.javawebinar.topjava.UserTestData.*;
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
 })
-@ActiveProfiles("hsqldb")
+@ActiveProfiles("postgres")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles({"postgres"})
 public class UserServiceTest {
@@ -39,6 +39,7 @@ public class UserServiceTest {
     @Before
     public void setUp() throws Exception {
         dbPopulator.execute();
+        service.evictCache();
     }
 
     @Test
