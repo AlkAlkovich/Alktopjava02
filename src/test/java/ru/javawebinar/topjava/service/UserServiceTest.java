@@ -25,7 +25,6 @@ import static ru.javawebinar.topjava.UserTestData.*;
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
 })
-@ActiveProfiles("postgres")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles({"postgres"})
 public class UserServiceTest {
