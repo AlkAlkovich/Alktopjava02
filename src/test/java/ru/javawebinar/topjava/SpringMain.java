@@ -14,8 +14,8 @@ public class SpringMain {
         // java 7 Automatic resource management
 //        try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/mock.xml")) {
         try (GenericXmlApplicationContext ctx = new GenericXmlApplicationContext()) {
-            ctx.getEnvironment().setActiveProfiles("postgres");
-            ctx.load("spring/spring-app.xml", "spring/spring-db.xml");
+            ctx.getEnvironment().setActiveProfiles(Profiles.POSTGRES);
+            ctx.load("spring/spring-app.xml", "spring/mock.xml");
             ctx.refresh();
             System.out.println("\n" + Arrays.toString(ctx.getBeanDefinitionNames()) + "\n");
             UserMealRestController adminController = ctx.getBean(UserMealRestController.class);
