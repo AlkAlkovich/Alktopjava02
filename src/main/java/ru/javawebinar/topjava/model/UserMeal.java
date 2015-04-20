@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import ru.javawebinar.topjava.util.TimeUtil;
 
@@ -44,6 +45,7 @@ public class UserMeal extends BaseEntity {
     @Column(name = "calories")
     protected int calories;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
