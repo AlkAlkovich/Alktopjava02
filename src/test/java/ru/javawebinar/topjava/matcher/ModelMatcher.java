@@ -66,8 +66,8 @@ public class ModelMatcher<T, R> {
         return content().string(new TestMatcher<List<T>>(Arrays.asList(expected)) {
             @Override
             protected boolean compare(List<T> expected, String actual) {
-                List<R> actualList = map(fromJsonValues(actual), entityConverter);
-                List<R> expectedList = map(expected, entityConverter);
+                List<R> actualList = (List<R>) map(fromJsonValues(actual), entityConverter);
+                List<R> expectedList = (List<R>) map(expected, entityConverter);
                 return expectedList.equals(actualList);
             }
         });

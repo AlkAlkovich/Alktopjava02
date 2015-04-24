@@ -4,12 +4,12 @@
 
 <%--
 <fmt:setLocale value="ru"/>
-<fmt:setBundle basename="messages.app"/>
---%>
+
+--%><fmt:setBundle basename="messages/app"/>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
 
-        <a href="meal">
+        <a href="meals">
             <div class="navbar-header navbar-brand"><fmt:message key="app.title"/></div>
         </a>
 

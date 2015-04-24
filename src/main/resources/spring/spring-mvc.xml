@@ -43,9 +43,14 @@
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp"/>
 
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
           p:cacheSeconds="60"
           p:defaultEncoding="UTF-8">
-        <property name="basenames" value="file:///#{systemEnvironment['TOPJAVA_ROOT']}/conf/messages/app"/>
+
+        <property name="basenames">
+            <list>
+                <value>messages/app</value>
+            </list>
+        </property>
     </bean>
 </beans>

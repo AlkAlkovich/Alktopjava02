@@ -8,6 +8,14 @@ function makeEditable(ajaxUrl) {
         deleteRow($(this).attr("id"));
     });
 
+    $('.edit').click(function () {
+        $('#item_id').val($(this).attr("id"));
+        $('#editRow').modal(function(){
+            $(this).attr("placeholder", "Type your answer here");
+        });
+
+    });
+
     $('#detailsForm').submit(function () {
         save();
         return false;
@@ -41,7 +49,6 @@ function updateTable() {
 
 function save() {
     var frm = $('#detailsForm');
-    debugger;
     $.ajax({
         type: "POST",
         url: ajaxUrl,
