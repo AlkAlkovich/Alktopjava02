@@ -29,6 +29,7 @@
 
                     </datatables:column>
 
+
                     <datatables:column filterable="false" sortable="false">
                         <a class="btn btn-xs btn-primary edit" id="${meal.id}">Edit</a>
                         <a class="btn btn-xs btn-danger delete" id="${meal.id}">Delete</a>
