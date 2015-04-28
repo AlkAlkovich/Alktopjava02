@@ -26,7 +26,7 @@ import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
 @Transactional
 public class UserMealRestControllerTest extends WebTest {
 
-    public static final String REST_URL = "/rest/profile/meals/";
+    public static final String REST_URL = UserMealRestController.REST_URL + '/';
 
     @Autowired
     private UserMealService service;

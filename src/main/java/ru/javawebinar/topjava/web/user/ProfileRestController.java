@@ -14,9 +14,10 @@ import ru.javawebinar.topjava.model.User;
  * 06.03.2015.
  */
 @RestController
-@RequestMapping("/rest/profile")
+@RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController {
 
+    public static final String REST_URL = "/rest/profile";
     @Autowired
     private UserHelper helper;
 

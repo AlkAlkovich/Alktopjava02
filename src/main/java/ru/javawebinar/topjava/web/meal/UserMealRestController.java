@@ -18,9 +18,10 @@ import java.util.List;
  * 06.03.2015.
  */
 @RestController
-@RequestMapping("/rest/profile/meals")
+@RequestMapping(UserMealRestController.REST_URL)
 public class UserMealRestController {
 
+    public static final String REST_URL = "/rest/profile/meals";
     @Autowired
     private UserMealHelper helper;
 
@@ -46,8 +47,8 @@ public class UserMealRestController {
 
     @RequestMapping(value = "/between", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserMeal> getBetween(
-            @RequestParam(value = "startDate")LocalDateTime startDate,
-            @RequestParam(value = "endDate", defaultValue = "")LocalDateTime endDate) {
+            @RequestParam(value = "startDate") LocalDateTime startDate,
+            @RequestParam(value = "endDate", defaultValue = "") LocalDateTime endDate) {
         return helper.getBetween(startDate, endDate);
     }
 
@@ -61,7 +62,7 @@ public class UserMealRestController {
         UserMeal created = helper.create(meal);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/rest/profile/meals/{id}")
+                .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
 
         HttpHeaders httpHeaders = new HttpHeaders();

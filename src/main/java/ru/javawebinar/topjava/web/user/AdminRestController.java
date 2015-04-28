@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.javawebinar.topjava.LoggerWrapper;
 import ru.javawebinar.topjava.model.User;
 
 import java.net.URI;
@@ -18,9 +17,9 @@ import java.util.List;
  * 06.03.2015.
  */
 @RestController
-@RequestMapping("/rest/admin/users")
+@RequestMapping(AdminRestController.REST_URL)
 public class AdminRestController {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(ProfileRestController.class);
+    static final String REST_URL = "/rest/admin/users";
 
     @Autowired
     private UserHelper helper;
@@ -39,7 +38,7 @@ public class AdminRestController {
     public ResponseEntity<User> create(@RequestBody User user) {
         User created = helper.create(user);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/rest/admin/users/{id}")
+                .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(uriOfNewResource);
