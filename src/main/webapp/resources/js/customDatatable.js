@@ -10,9 +10,8 @@ function makeEditable(ajaxUrl) {
 
     $('.edit').click(function () {
         $('#item_id').val($(this).attr("id"));
-        $('#editRow').modal(function(){
-            $(this).attr("placeholder", "Type your answer here");
-        });
+        $('#description').val($(this).attr('description'));
+        $('#editRow').modal();
 
     });
 

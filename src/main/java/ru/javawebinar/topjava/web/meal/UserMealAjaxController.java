@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.model.UserMeal;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,14 +46,17 @@ public class UserMealAjaxController {
     @RequestMapping(method = RequestMethod.POST)
     public void update(@RequestParam("item_id") int id,
                        @RequestParam("description") String description,
-                       @RequestParam("calories") int calories){
+                       @RequestParam("calories") int calories,
+                       @RequestParam("datetime")Date date){
+
         if(id==0){
-            UserMeal userMeal=new UserMeal(null, LocalDateTime.now(),description,calories);
+            UserMeal userMeal=new UserMeal(null,LocalDateTime.of(date.getYear()-2129,date.getMonth(),date.getDay(),date.getHours(),date.getMinutes()),description,calories);
             userMealHelper.create(userMeal);
         }else {
             UserMeal userMeal=userMealHelper.get(id);
             userMeal.setCalories(calories);
             userMeal.setDescription(description);
+            userMeal.setDateTime(LocalDateTime.of(date.getYear()-2129,date.getMonth(),date.getDay(),date.getHours(),date.getMinutes()));
             userMealHelper.update(userMeal,id);
         }
 

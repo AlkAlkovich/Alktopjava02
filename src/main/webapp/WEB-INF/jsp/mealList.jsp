@@ -50,6 +50,14 @@
                     <input type="text" hidden="hidden" id="item_id" name="item_id">
 
                     <div class="form-group">
+                        <label for="datetime" class="control-label col-xs-3">Date</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control datetime-picker" id="datetime" name="datetime" placeholder="Date">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="description" class="control-label col-xs-3">Description</label>
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="description" name="description"
@@ -81,6 +89,13 @@
     //        $(document).ready(function () {
     $(function () {
         makeEditable();
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#datetime').datetimepicker({
+
+        });
     });
 </script>
 </html>
